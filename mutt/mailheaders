@@ -1,0 +1,17 @@
+# -*- muttrc -*-
+
+# Headers to ignore/see
+# Ignore everything but the really important lines:
+ignore *
+unignore from: date subject to cc reply-to:
+unignore organization organisation
+unignore user-agent: x-agent: x-mailer: x-newsreader:
+unignore newsgroups: posted-to: x-spam-rule: X-Spam-Status: X-SpamProbe:
+# These can provide amusement
+unignore X-Fnord: X-WebTV-Stationery: X-Message-Flag:
+
+# ordering of headers in the pager
+unhdr_order *
+hdr_order Date: From: To: Cc: X-Newsreader: X-Mailer: Organization: Organisation: User-Agent: X-Fnord: X-WebTV-Stationery: X-Message-Flag: Newsgroups: Reply-To: X-Spam-Status: x-spam-rule: x-SpamProbe: Subject:
+
+

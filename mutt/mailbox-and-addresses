@@ -1,0 +1,134 @@
+# -*- muttrc -*-
+
+## "alternates" tells mutt about your addresses.  Mutt thus can show mails
+## addressed to you in the folder index as "personal" using the flag '+'.
+
+alternative_order text/plain text/html text   # I like plaintext more than html.
+
+# Email addresses (oh, I have too many).
+alternates (jdt@cookiesystems.com|jdt@willowgourmet.com.au|jtarrant@incuto.com|jaime.tarrant@gmail.com|jtarrant@ibenox.com|jdt.l@cookiesystems.com|jaime.tarrant@gmail.com)
+
+## ======================================
+## Folder and Send Hooks
+## ======================================
+
+folder-hook .     'set record=~/.mail/sent'
+
+# Set the defaults for folders:
+folder-hook .     set timeout=30
+folder-hook .     set sort=threads
+#folder-hook .    set sort_aux=reverse-last-date-received
+folder-hook .     set sort_aux=date-sent
+
+# When I'm in the main index, check more often :)
+folder-hook "!"   set timeout=5
+# Mail in my inbox is more date than thread sensitive...
+folder-hook "!"   set sort=date-sent
+folder-hook "sent"  set sort=date-sent
+
+folder-hook "lists/debian"  set sort=threads
+folder-hook "lists/debian" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/fedora"  set sort=threads
+folder-hook "lists/fedora" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/mutt"   "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/erlang" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/erlang"  set sort=threads
+folder-hook "default"       set sort=date
+folder-hook "default" "     set from=jdt@cookiesystems.com"
+folder-hook "ibenox"       "set from=jtarrant@ibenox.com"
+folder-hook "ibenox"        set sort=date
+folder-hook "incuto"       "set from=jtarrant@incuto.com"
+folder-hook "incuto"        set sort=date
+folder-hook "willowgourmet"       "set from=jdt@willowgourmet.com.au"
+folder-hook "willowgourmet"        set sort=date
+folder-hook "cahp"          set sort=threads
+folder-hook "cahp"         "set from=jaime.tarrant@cleanatheart.com"
+#folder-hook "springsource" "set from=jaime.tarrant@springsource.com"
+
+save-hook .* =arch/%B
+folder-hook .    save-hook .* =arch/%B
+#folder-hook .    unmy_hdr *
+#folder-hook .    'my_hdr From: Jaime Tarrant <jdt@cookiesystems.com>'
+#folder-hook .    my_hdr X-Editor: Vim http://www.vim.org/
+#folder-hook .    my_hdr X-Info: http://www.cookiesystems.com
+#send-hook   .    my_hdr X-Operating-System: Linux/`uname -r` (`uname -m`)
+#send-hook   .    my_hdr X-Uptime: \`uptime\`
+#folder-hook .    set signature="~/.signature"
+#folder-hook .     set pgp_c reate_traditional=no
+
+## SEND HOOKS - choose the right signature file
+
+send-hook ^gmail.com \
+	"set signature=~/.signature-gmail"
+
+send-hook jtarrant@ibenox.com \
+	"set signature=~/.signature-ibenox"
+
+send-hook jdt-lists@cookiesystems.com \
+	"set signature=~/.signature-lists"
+
+send-hook jaime.tarrant@gmail.com \
+	"set signature=~/.signature-gmail"
+
+send-hook jdt@cookiesystems.com \
+	"set signature=~/.signature-cookiesystems"
+
+#send-hook ^jaime.tarrant@springsource.com \
+#	"set signature=~/.signature-springsource"
+
+## "mailboxes" defines the list of folders to be checked for new mail
+## Mutt both can show the number of mailboxes with new mail in the index and
+## you can cycle through these after giving the "change-folder" command.  :-)
+#mailboxes !
+#mailboxes +SPAM
+#mailboxes `for file in ~/mail/lists/*; do echo -n "+lists/$(basename $file) "; done`
+
+bind  pager /       search
+set folder = $HOME/.mail
+
+mailboxes =default/    # Main mailbox (procmail puts wanted mail here)
+mailboxes =ibenox/     # IBENOX business mailbox
+mailboxes =incuto/     # Incuto business mailbox
+mailboxes =wg/         # Willow Gourmet business mailbox
+mailboxes =cahp/       # Clean at Heart business mailbox
+mailboxes =lists/debian/  # Lists
+mailboxes =lists/erlang/
+mailboxes =lists/redis/
+mailboxes =lists/fedora/
+mailboxes =lists/archlinux/
+#mailboxes =lists/arch-projects
+#mailboxes =lists/ubuntu
+mailboxes =lists/python/
+mailboxes =lists/exim/
+mailboxes =lists/vim/
+mailboxes =lists/mutt/
+mailboxes =lists/bugs/
+mailboxes =lists/olists/
+mailboxes =lists/psql/
+mailboxes =lists/msmtp/
+mailboxes =lists/securityfocus/
+mailboxes =lists/debbugs/
+mailboxes =lists/ugs/
+mailboxes =lists/debian-dev/
+mailboxes =system/     # System messages
+mailboxes =spam/       # Spam
+mailboxes =unwanted/   # Mainly HTML only messages - I check only occasionally
+mailboxes =keep/       # Archive for local storage of wanted mail
+mailboxes =sent/       # Sent messages (everything that I send goes here).
+save-hook .* =keep/    # default Maildir to (s)ave mail is =keep
+
+subscribe debian-user debian-devel redis redis-db debian-publicity exim-users exim-announce vim-users python-users slug mutt-users msmtp-users erlang-questions # subscribed to these lists
+
+## =====================================================================
+## Tag older mailbox messages (lists especially) for easy deleting
+## or archiving, etc...
+## =====================================================================
+
+# folder-hook =lists/debian$ 'push T~r>3m!~F\n\;'        # 3 month
+# folder-hook =lists/debian-dev$ 'push T~r>3m!~F\n\;'    # 3 months
+# folder-hook =lists/mutt$ 'push T~r>3m!~F\n\;'          # 3 months
+# folder-hook =lists/ubuntu$ 'push T~r>3m!~F\n\;'        # 3 months
+# folder-hook =lists/securityfocus$ 'push T~r>3m!~F\n\;' # 3 months
+# folder-hook =spam 'push T~r>1m!~F\n\;'                 # 1 month
+
+

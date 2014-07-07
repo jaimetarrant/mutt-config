@@ -1,0 +1,231 @@
+# -*- muttrc -*-
+#
+# macros for mutt.
+
+# Macros for use in the index.
+macro index "\Cx\Cb" "<change-folder>?"                                     # Folder list.
+macro index "\Cx\Cs" "<pipe-message>cat > ~/"                               # Save message
+macro index "\'"     "<clear-flag>r"                                        # Mark as un-replied
+#macro index "y"      "<sync-mailbox><change-folder>?<toggle-mailboxes>"     # "-y" screen
+#macro index "\Cb"    "<pipe-message>urlview<enter>"                         # URL viewer.
+macro index "\ea"    "<change-folder>=archives/<tab><tab>"                  # List archives
+#macro index "\eb"    "<pipe-message>lbdb-fetchaddr<enter>"                  # Store address details in lbdb.
+#macro index "\eh"    "<pipe-message>mailhops<enter>"                        # View the path of the mail.
+macro index "\ef"    "<pipe-message>view-x-face<enter>"                     # View the X-Face (if there is one).
+macro index "\Cl"    "<pipe-message>less<enter>"                             # View the message in less.
+#macro index "\Cs\Co" "<limit>~h \"X-SpamProbe: GOOD\"<enter><last-entry>"   # View good emails.
+#macro index "\Cs\Cs" "<limit>~h \"X-SpamProbe: SPAM\"<enter><last-entry>"   # View bad emails.
+
+# Macros for use in the pager.
+macro pager "w"      "<enter-command>set invsmart_wrap invmarkers<enter>"   # Toggle wrap stuff
+macro pager "y"      "<sync-mailbox><change-folder>?<toggle-mailboxes>"     # "-y" screen
+macro pager "\e1"    "<enter-command>set pager_index_lines=1<enter>"        # Change PIL size
+macro pager "\e2"    "<enter-command>set pager_index_lines=2<enter>"        # Change PIL size
+macro pager "\e3"    "<enter-command>set pager_index_lines=3<enter>"        # Change PIL size
+macro pager "\e4"    "<enter-command>set pager_index_lines=4<enter>"        # Change PIL size
+macro pager "\e5"    "<enter-command>set pager_index_lines=5<enter>"        # Change PIL size
+macro pager "\e6"    "<enter-command>set pager_index_lines=6<enter>"        # Change PIL size
+macro pager "\e7"    "<enter-command>set pager_index_lines=7<enter>"        # Change PIL size
+macro pager "\e8"    "<enter-command>set pager_index_lines=8<enter>"        # Change PIL size
+macro pager "\e9"    "<enter-command>set pager_index_lines=9<enter>"        # Change PIL size
+macro pager "\e0"    "<enter-command>set pager_index_lines=0<enter>"        # Change PIL size
+#macro pager "\Cb"    "<pipe-message>urlview<enter>"                         # URL viewer.
+macro pager "\Cx\Cb" "<change-folder>?"                                     # Folder list.
+macro pager "\Cx\Cs" "<pipe-message>cat > ~/"                               # Save message
+#macro pager "\eb"    "<pipe-message>lbdb-fetchaddr<enter>"                  # Store address details in lbdb.
+#macro pager "\eh"    "<pipe-message>mailhops<enter>"                        # View the path of the mail.
+macro pager "\ef"    "<pipe-message>view-x-face<enter>"                     # View the X-Face (if there is one).
+macro pager "\Cl"    "<pipe-message>less<enter>"                            # View the message in less.
+#macro pager "\el"    "<enter-command>set invpipe_decode<enter>\ <pipe-message>linkify|w3m -T text/html<enter><enter-command>\ set invpipe_decode<enter>"            # View the message in w3m.
+#macro pager "\Cs\Cs" "<pipe-message>spamprobe -T score<enter>"              # What's the score for this message?
+#macro pager "\Cs\Cj" "<pipe-message>spamprobe spam<enter>"                  # This message is junk.
+#macro pager "\Cs\Cg" "<pipe-message>spamprobe good<enter>"                  # This message is good.
+
+# Provide some "on-line" help.
+macro generic "\e?" "<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
+macro index   "\e?" "<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
+macro pager   "\e?" "<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
+
+# ===========================================
+# # Use abook as the address book and query db
+# # ===========================================
+# macro index ,ea "!abook-autoexport\n:source ~/.mutt/aliases\n" "Start
+# abook"
+# #macro index A "|abook-autoexport --add-email-quiet\n:source
+# ~/.mutt/aliases\n".
+# # "Create new alias from the actual message"
+# #set query_command = "abook --mutt-query '%s'"
+macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
+# #macro generic,index,pager A "<pipe-message>abook --add-email<return>"
+# "add the sender address to abook"
+#
+# # Goobook
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+#
+#
+#
+## =================================================================
+## MACROS to change my sender account for composing new messages or
+## replying to messages not addressed to me (thus mutt is not sure
+## which account to use
+## =================================================================
+
+macro generic,index,pager ,cs ":set from=jdt@cookiesystems.com"
+macro generic,index,pager ,cl ":set from=jdt.l@cookiesystems.com"
+macro generic,index,pager ,tg ":set from=jaime.tarrant@gmail.com"
+#macro generic,index,pager ,ts ":set from=jaime.tarrant@springsource.com"
+#macro generic,index,pager ,tv ":set from=jtarrant@visiongds.com"
+macro generic,index,pager ,ib ":set from=jtarrant@ibenox.com"
+macro generic,index,pager ,ts ":set from=jaime.tarrant@tarrissa.com"
+macro generic,index,pager ,jd ":set from=jdt@ibenox.com"
+macro generic,index,pager ,ic ":set from=jtarrant@incuto.com"
+macro generic,index,pager ,wg ":set from=jdt@willowgourmet.com.au"
+#
+#
+bind attach ' ' select-entry
+
+## ============================
+## Bindings for index and pager
+## ============================
+
+bind index   \t    next-new
+bind pager   \t    next-new
+bind index   ' '   next-unread
+bind pager   ' '   next-unread
+bind index   V     show-version
+bind pager   V     show-version
+#bind index   A     create-alias
+#bind pager   A     create-alias
+bind pager h display-toggle-weed        #toggle headers with h key
+
+
+# ==============================
+# Easy Save
+# ==============================
+
+macro attach W <save-entry><kill-line>/home/jdt/tmp
+macro attach E <save-entry><kill-line>/home/jdt/tmp<enter>
+
+
+# ===========================================
+# Use abook as the address book and query db
+# ===========================================
+#macro index ,ea "!abook-autoexport\n:source ~/.mutt/aliases\n" "Start abook"
+#macro index A "|abook-autoexport --add-email-quiet\n:source ~/.mutt/aliases\n"
+# "Create new alias from the actual message"
+#set query_command = "abook --mutt-query '%s'"
+#macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
+#macro generic,index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
+
+# Goobook
+# set query_command="goobook query \'%s\'"
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
+#macro index,pager ,td <pipe-message><enter>s="TODO\n"
+
+# Add tasks to task
+macro index ,td "<pipe-message>taskopen.sh<enter>"
+
+##-run the little brother database query binary
+#set query_command = "abook --mutt-query '%'"
+
+#SPAMASSASSIN Macros
+
+macro index,pager ,ss <pipe-message>"sa-learn --spam --no-sync"<enter>s="SPAM\n"
+#macro pager ,ss <pipe-message>"sa-learn --spam --no-sync"<enter>s="SPAM\n"
+macro index,pager ,sh <pipe-message>"sa-learn --ham --no-sync"<enter>s="default\n"
+#macro pager ,sh  <pipe-message>"sa-learn --ham --no-sync"<enter>s="default\n"
+
+# GTD Macros
+#macro index \ch "!vim ~/.GTD/todo.gtd\n" "start GTD"
+#macro pager \ch "!vim ~/.GTD/todo.gtd\n" "start GTD"
+
+macro index,pager ,mt <pipe-message>"mutt2task"<enter>
+
+# These run fetchmail (or wake up the daemon)
+#macro index,pager G "getmail --rcfile getmailrc-tarsysco --rcfile getmailrc-cahp"
+#macro pager G "!fetchmail -k -m 'procmail -d %T'\r"
+
+## ==================
+## Bindings for index
+## ==================
+
+bind index   P          recall-message
+bind index   s          save-message
+bind browser x          check-new
+bind index   <pagedown> next-page
+bind index   <pageup>   previous-page
+bind index   x          sync-mailbox
+bind index   a          tag-prefix
+bind index   \;         tag-entry
+bind index   t          tag-entry
+
+## =====================================
+##  cursor movement system
+## =====================================
+
+## custom key bindings + macros
+bind index <up> previous-entry
+#bind index <right> next-entry
+bind index <down> next-entry
+bind index <right> display-message
+bind index <left> previous-entry
+
+bind pager <pageup> previous-page
+bind pager <pagedown> next-page
+bind pager <left>   exit
+bind pager <right>  view-attachments
+bind pager <home> top
+bind pager <end> bottom
+bind pager <up> previous-line
+bind pager <down> next-line
+bind pager d delete-message
+bind pager \t next-unread
+bind compose \r send-message
+bind index x noop
+bind  attach  <left>   exit
+bind  attach  <right>  view-attach
+#
+
+# ======================================
+# Quickly change to my favorite folders:
+# ======================================
+macro index  "\\S"  "c=sent\r"
+macro pager  "\\S"  "c=sent\r"
+macro index  I      "c!\n" "Go to Inbox"
+macro pager  I      "c!\n" "Go to Inbox"
+
+
+# ===========================
+#    Bindings for pager
+# ===========================
+
+bind pager     /   search
+bind pager     L   list-reply
+bind pager     b   bounce-message
+bind pager     f   forward-message
+bind pager     m   mail
+bind pager     g   group-reply
+bind pager     j   next-line
+bind pager     k   previous-line
+bind pager     :   enter-command
+bind pager     p   previous-undeleted
+bind pager     n   next-undeleted
+bind pager     \n  next-new
+bind compose   \n  send-message
+bind compose   s   send-message
+bind pager     ,p  print-message
+
+macro pager J "!gpg --keyserver wwwkeys.eu.pgp.net --recv-key " "Get PGP Key"
+macro pager K "!gpg --lsign-key " "Sign PGP Key"
+
+
+macro pager "i" "<sync-mailbox><change-folder>?<toggle-mailboxes>"
+macro index "i" "<sync-mailbox><change-folder>?<toggle-mailboxes>"
+
+macro compose S "Fgpg --clearsign\ny" "clearsign message"
+

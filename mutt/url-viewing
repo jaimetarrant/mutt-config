@@ -1,0 +1,19 @@
+# -*- muttrc -*-
+
+## ==============================================================
+## URLVIEW for easy url viewing
+## ==============================================================
+
+# simulate the old url menu
+#macro index,pager ,U "<enter-command> set my_pdsave=\$pipe_decode<enter>\
+#<enter-command> unset pipe_decode<enter>\
+#<pipe-message>extract_url.pl<enter>\
+#<enter-command> set pipe_decode=\$my_pdsave<enter>" "get URLs"
+
+
+macro index ,U |urlview\n 'call urlview to extract URLs out of a message'
+macro pager ,U |urlview\n 'call urlview to extract URLs out of a message'
+#macro index ,U |urlscan\n 'call urlview to extract URLs out of a message'
+#macro pager ,U |urlscan\n 'call urlview to extract URLs out of a message'
+
+

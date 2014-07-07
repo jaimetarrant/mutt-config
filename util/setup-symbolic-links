@@ -1,0 +1,137 @@
+#!/bin/bash
+
+#####################################################################
+# setup-symbolic-links
+#
+# part of Jaime's dotfiles
+#
+# This file backs up existing configs that are found and creates
+# symbolic links for them to a specified config directory where the
+# actual config files live.
+#
+
+
+# Create a variable to hold the file names that we wish to create
+# symbolic links for.
+#
+# *** YOU PROBABLY NEED TO UPDATE THIS FOR YOUR CONFIGURATION ***
+#
+# All files listed here will be treated as having a leading period (i.e.
+# .muttrc or .xinitrc) in the users home directory, and will be treated
+# as not having a leading period in the $CONFIG_DIR directory.
+#
+
+export LINKFILES="muttrc procmailrc mailcap"
+
+# Setup variables
+
+BACKUPFILE_DATE=`date +%Y%m%d-%s` # The prefix added to backup files
+CONFIG_DIR=~/.mutt-config         # Where are the dotfiles?
+
+# die if pushd does not exist
+
+if ! type pushd > /dev/null; then
+  echo " pushd / popd not found, exiting ..."
+  exit 0
+else
+  echo " found pushd/popd we are proceeding ..."
+fi
+
+# Firstly, lets go home
+
+pushd ~ > /dev/null
+
+#####################################################################
+# Functions
+
+checkForConfigDirectory() {
+  if [[ ! -e $CONFIG_DIR ]]; then
+    echo " The $CONFIG_DIR directory cannot be found."
+    exit 0
+  else
+    echo " found $CONFIG_DIR directory ..."
+  fi
+}
+
+checkConfiguredFilesExist() {
+  for LINKFILE in $LINKFILES; do
+    if [[ -e $CONFIG_DIR/$LINKFILE ]]; then
+      echo " found $LINKFILE ..."
+    else
+      echo " $LINKFILE not found ..."
+      echo " There is something wrong with this configuration. "
+      exit 0
+    fi;
+  done
+}
+
+backupExistingConfigFiles() {
+  for LINKFILE in $LINKFILES; do
+    if [[ -e ~/.$LINKFILE ]]; then
+      echo " Creating a backup of regular file .$LINKFILE as .$LINKFILE-$BACKUPFILE_DATE"
+      mv ~/.$LINKFILE ~/.$LINKFILE-$BACKUPFILE_DATE
+    else
+      echo " $LINKFILE not found, a backup will not be made ..."
+    fi;
+  done
+}
+
+# -e doesnt seem to pick up symlinks, so this function does it again with -L .
+# Note to self -- read the docs and have only one backup function that works
+# properly.
+
+backupExistingConfigSymLinks() {
+  for LINKFILE in $LINKFILES; do
+    if [[ -L ~/.$LINKFILE ]]; then
+      echo " Creating a backup of symbolic link .$LINKFILE as .$LINKFILE-$BACKUPFILE_DATE"
+      mv ~/.$LINKFILE ~/.$LINKFILE-$BACKUPFILE_DATE
+    else
+      echo " $LINKFILE not found, a backup will not be made ..."
+    fi;
+  done
+}
+
+createSymLinks() {
+  for LINKFILE in $LINKFILES; do
+    if [[ ! -e ~/.$LINKFILE ]]; then
+      echo " Creating symbolic link for $LINKFILE "
+      ln -s $CONFIG_DIR/$LINKFILE .$LINKFILE
+    else
+      echo ""
+      echo " hmmm "
+      echo " Something that should not be possible happened."
+      echo " Rats ... "
+      exit 0
+    fi;
+  done
+}
+
+#####################################################################
+# Execute the script
+#
+
+# Run some checks to make sure that we do not error out
+
+checkConfiguredFilesExist
+checkForConfigDirectory
+
+# Backup existing files or symlinks if they exist.
+
+backupExistingConfigFiles
+backupExistingConfigSymLinks
+
+# Link the files
+
+createSymLinks
+
+# Clean up
+
+# unset BACKUPFILE_DATE
+# unset CONFIG_DIR
+# unset LINKFILES
+# unset LINKFILE
+
+popd > /dev/null # go back to wherever we where when the script was run.
+
+# Done
+

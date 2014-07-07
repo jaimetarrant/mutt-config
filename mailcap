@@ -1,0 +1,9 @@
+#application/msword; antiword %s; copiousoutput
+#text/html;      w3m -dump %s; copiousoutput
+text/html;      w3m -I %{charset} -dump %s; nametemplate=%s.html; copiousoutput
+application/msword;antiwordxp.rb %s | less ; nametemplate=%s.doc; copiousoutput
+application/pdf; zathura %s ; copiousoutput
+application/ms-tnef; tnef %s ; copiousoutput
+image/jpeg; feh %s; copiousoutput
+image/png; feh %s; copiousoutput
+image/gif; feh %s; copiousoutput

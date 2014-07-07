@@ -1,0 +1,359 @@
+#####################################################################
+# Jaime's procmail config
+#
+
+SHELL      = /bin/bash
+LINEBUF    = 4096
+VERBOSE    = off
+# PATH     = /bin:/usr/bin:/usr/local/bin # not really needed - should work on most
+#                                           systems.
+MAILDIR    = $HOME/.mail
+DEFAULT    = $MAILDIR/cs/ # Trailing slash indicates Maildir
+SPAM       = $MAILDIR/spam/
+UNWANTED   = $MAILDIR/unwanted/
+
+LOGFILE    = $HOME/.mail/procmaillog
+FORMAIL    = /usr/bin/formail
+SENDMAIL   = /usr/bin/msmtp
+
+# MAILDIR LINES
+# # Add Lines header for mutt with Maildirs. Mutt shows lines based on Lines
+# # header.  We have to do this manually for Maildir delivered messages.
+:0 BWfh
+* H ?? !^Lines:
+* -1^0
+*  1^1 ^.*$
+| formail -A "Lines: $="
+
+# Remove duplicate messages - no idea how it works.
+:0 hW: msgid.lock
+| $FORMAIL -D 8192 msgid.cache
+
+# SpamAssassin sample procmailrc
+# [[ http://wiki.apache.org/spamassassin/UsedViaProcmail ]]
+#
+# The lock file ensures that only 1 spamassassin invocation happens
+# at 1 time, to keep the load down.
+
+# apply spamassassin to messages < 250 kb
+:0 fbw: spamassassin.lock
+* < 256000
+| spamassassin
+
+# Mails with a score of 15 or higher are almost certainly spam
+# (with 0.05% false positives according to rules/STATISTICS.txt).
+:0 :
+* ^X-Spam-Level: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+$SPAM
+
+# All mail tagged as spam (eg. with a score higher than the set
+# threshold) is moved to SPAM too.
+:0 :
+* ^X-Spam-Status: Yes
+$SPAM
+
+# Work around procmail bug: any output on stderr will cause
+# the "F" in "From" to be dropped.  This will re-add it.
+:0
+* ^^rom[ ]
+{
+LOG="*** Dropped F off From_ header! Fixing up. "
+
+:0 fhw
+| sed -e '1s/^/F/'
+}
+
+# bad mailer
+:0 D
+* ^X-[Mm]ailer:.*(MassE-Mail|Floodgate|Extractor|FastMail|WorldMerge)
+{
+EXITCODE = $EX_NOUSER
+LOG="Bad Mailer "
+:0 :
+$SPAM
+}
+
+# the following recipe condition is all one line - prevents base64 hiding
+:0 :
+* 1^0 B ?? Content-Type: text/(html|plain)(;[   ]*$?[   ]*charset="iso-8859-1")?($Content-Disposition: inline)?$Content-Transfer-Encoding: base64
+$SPAM
+
+# Invalid message-id format - another thing Microsoft gets wrong, wrong,
+# wrong, but I don't CARE any more -- I won't exempt them this time <--
+# thanks whoever I found this from! I like it :)
+:0
+* !^Message-Id:[ ]*<[^ @]+@[^ @]+>
+{
+LOG="Invalid Message id "
+:0 :
+$UNWANTED
+}
+
+#no more html messages
+:0
+* ^Content-Type:.*html
+{
+LOG="HTML Message"
+:0 :
+$UNWANTED
+}
+
+# It is reliably reported that this single test may kill half your
+# spam in one shot:
+:0
+* !^Message-Id
+{
+LOG = "No ID: "
+:0 :
+$SPAM
+}
+
+# All mail tagged as spam (eg. with a score higher than the set
+# threshold) is moved to SPAM.
+:0 :
+* ^X-Spam-Status: Yes
+$SPAM
+
+
+#####################################################################
+# Add message header flags for processing after delivery for required
+# email address types.
+#
+# Two approaches here - not sure which works better.
+
+# Add a header to identify finance related IBENOX emails
+:0 c
+* ^(From|To|Cc).*ibenox.com
+* ^Subject.*(invoice|invoicing|payment)
+{
+:0 fhw
+| formail -a "X-IBENOXFIN: 1";
+}
+
+#####################################################################
+# Now, lets try to deal with some actual mail
+#
+
+# LOCAL SYSTEM Mail - Always deliver it
+:0
+* ^From:.*localhost
+$MAILDIR/system/
+
+# Cookie Systems Mail
+:0
+* ^(From|Cc|To).*cookiesystems.com
+$MAILDIR/default/
+
+# Willow Gourmet
+:0
+* ^(From|Cc|To).*willowgourmet.com.au
+$MAILDIR/wg/
+
+# Incuto
+:0
+* ^(From|Cc|To).*incuto.com
+$MAILDIR/incuto/
+
+# IBENOX
+:0
+* ^(From|Cc|Tp).*ibenox.com
+$MAILDIR/ibenox/
+
+# Gmail email address
+:0
+* ^(From|Cc|To).jaime.tarrant@gmail.com
+$MAILDIR/default/
+
+# CAHP mail
+:0
+* ^(From|Cc|To).*cleanatheart.com
+$MAILDIR/cahp/
+
+
+#####################################################################
+# Mailing Lists
+
+:0
+* ^(From|Cc|To).*lists.fedoraproject.org
+$MAILDIR/lists/fedora/
+
+:0
+* ^List-Id:.*users.list.fedoraproject.org
+$MAILDIR/lists/fedora/
+
+# Debian Development Mailing Lists
+:0
+* ^List-Id:.*debian-bugs
+$MAILDIR/lists/debian-dev/
+
+:0
+* ^List-Id:.*debian-release
+$MAILDIR/lists/debian-dev/
+
+:0
+* ^List-Id:.*debian-devel
+$MAILDIR/lists/debian-dev/
+
+# Debian Bugs Mailing Lists
+:0
+* ^(From|Cc|To).*bugs.debian.org
+$MAILDIR/lists/debbugs/
+
+# Debian Users - Mailing Lists
+:0
+* ^List-Id:.*debian-user
+$MAILDIR/lists/debian/
+
+:0
+* ^List-Id:.*debian-publicity
+$MAILDIR/lists/debian/
+
+:0
+* ^List-Id:.*debian-doc
+$MAILDIR/lists/debian/
+
+:0
+* ^List-Id:.*debian-legal
+$MAILDIR/lists/debian/
+
+# Missed Debian list catch-all
+:0 :
+* ^(From|Cc|To).*lists.debian.org
+$MAILDIR/lists/debian/
+
+# Erlang
+:0
+* ^(From|Cc|To).*lists.therestfulway.com
+$MAILDIR/lists/erlang/
+
+:0
+* ^List-Id:.*erlang-questions
+$MAILDIR/lists/erlang/
+
+# Security Focus
+:0
+* ^(From|Cc|To).*securityfocus.com
+$MAILDIR/lists/securityfocus/
+
+# Redis
+:0
+* ^(From|Cc|To).*redis@googlegroups.com
+$MAILDIR/lists/redis/
+
+:0 :
+* ^(From|Cc|To).*redis-db@googlegroups.com
+$MAILDIR/lists/redis/
+
+# msmtp
+:0
+* ^List-Id:.*msmtp-users
+$MAILDIR/lists/msmtp/
+
+# Mutt Mailinglist Mail
+:0
+* ^(From|Cc|To).*mutt.org
+$MAILDIR/lists/mutt/
+
+:0
+* ^List-Id:.*mutt-users
+$MAILDIR/lists/mutt/
+
+# Sydney Linux Users
+:0
+* ^List-Id:.*slug
+$MAILDIR/lists/ugs/
+
+#VIM users
+:0
+* ^List-Id:.*vim_use
+$MAILDIR/lists/vim/
+
+## Job email notifications
+
+:0
+* ^From:.*jobserve.com
+$MAILDIR/lists/it-market/
+
+:0
+* ^From:.*seek.com.au
+$MAILDIR/lists/it-market/
+
+
+#####################################################################
+# Low priority stuff that I do not want in my default inbox
+
+:0
+* ^(From|Cc|To).*twitter.com
+$MAILDIR/lists/twitter/
+
+:0
+* ^(From|Cc|To).*e-mail.microsoft.com
+$MAILDIR/unwanted/
+
+:0
+* ^(From|Cc|To).*fxcm.com.au
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*playstationmail.net
+$MAILDIR/unwanted/
+
+:0
+* ^(From|Cc|To).*cmune.com
+$MAILDIR/unwanted/
+
+:0
+* ^(From|Cc|To).*ebay.com.au
+$MAILDIR/unwanted/
+
+:0
+* ^(From|Cc|To).*group-digests@linkedin.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*groups-noreply@linkedin.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*no-reply@smartcompany.com.au
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*smartcompany.com.au
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*meetup.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*info@my.eurekareport.com.au
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*group-digests@linkedin.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*group-noreply@linkedin.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*itbusinessedge.com
+$MAILDIR/lists/olists/
+
+:0
+* ^(From|Cc|To).*email.businessspectator.com.au
+$MAILDIR/lists/olists/
+
+
+#####################################################################
+# Last rule: if mail gets this far, congratulate it, and deliver it
+# to the default mailbox.
+
+:0
+* .*
+$MAILDIR/default/
+
+# Done
+

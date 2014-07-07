@@ -1,0 +1,20 @@
+
+# Example config file for fetchmail
+# copy this file to ~/.fetchmailrc and change to suit your own requirements.
+# You can have as many accounts as you like - all mail gets sent to procmail.
+#
+# Set this file as with 0600 privileges. i.e.   chmod 0600 .fetchmailrc
+#
+
+# Tell fetchmail to start as a daemon
+
+set daemon 60
+
+# Google Apps Example
+
+poll imap.gmail.com protocol IMAP user 'jdt@cookiesystems.com' there with password 'topsecretpassword' keep ssl mda "/usr/bin/procmail -d %T"
+
+# Zoho Example
+
+poll imap.zoho.com protocol IMAP user 'jdt@willowgourmet.com.au' there with password 'topsecretpassword' keep ssl mda "/usr/bin/procmail -d %T"
+

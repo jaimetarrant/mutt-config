@@ -1,0 +1,194 @@
+## ========================================================
+## Jaime's .muttrc  <jaime.tarrant [at] cookiesystems.com>
+## ========================================================
+#
+# This file was originally adapted from that provided by Tom Gilbert. It
+# probably does not look anything like it now, its been quite a while!
+#
+# Tom's very good .muttrc - http://linuxbrit.co.uk/downloads/dot.muttrc
+#
+# It also includes ideas from many others.. Thanks to those ppl too.
+#
+# Base Config Settings
+
+set realname     = "Jaime Tarrant"  # hopefully wont change much
+set folder       = ~/.mail/         # directory with all mail folders
+set mbox_type    = "Maildir"        # Use Maildir (I used to use mbox which works fine too).
+set sendmail     = "/usr/bin/msmtp" # I use msmtp for easy config of multiple sender accounts.
+                                    # set alias_file =~/.mutt/aliases .. deprecated - using goobook now.
+# source ~/.mutt/aliases            # alias file location
+
+# Boolean Variables:
+#       set foo
+# or    unset foo
+# or    toggle foo
+# or    reset foo (reset to compile time default)
+# or    set nofoo  or set invfoo (inverts actual value)
+
+  set allow_8bit           # use QP or Base64 if unset.
+unset arrow_cursor         # "->" as cursor (faster on slow networks).
+  set ascii_chars          # Use ASCII chars for threading arrows.
+unset askbcc               # ask to fill out Bcc on mesg-send?
+unset askcc                # ask to fill out CC on mesg-send?
+  set attach_split         # handle every single attachment instead of concat
+unset autoedit             # start editor without asking for to, subject,...
+  set auto_tag             # if something is tagged, run commands on tagged msgs.
+unset beep                 # beep on certain user errors and other errors
+unset beep_new             # beep on new mail
+  set bounce_delivered     # unset => remove Delivered-To: when bouncing.
+  set check_new            # search for new messages in maildir/MH folders.
+unset collapse_unread      # don't collapse threads with unread mails
+unset confirmappend        # prompt for confirm when appending message to ex. mbox
+  set confirmcreate        # prompt for confirm when saving to non existing mbox
+  set copy                 # always keep a copy of my mails
+  set delete_untag         # untag messages when marking them for deletion.
+  set encode_from          # use Quoted-Printable, if ^From in a mail.
+  set fast_reply           # do not ask for to, subject,... when replying.
+  set fcc_attach           # store attachments when doing a Fcc
+  set fcc_clear            # FCCs will be stored unencrypted and unsigned
+                           # set followup_to
+unset force_name           # outgoing mail to be saved in folder of "login name"
+  set forward_decode       # decode messages when forwarding without MIME
+unset forward_decrypt      # decrypt PGP message, when mime_forward and !mime_fw_d
+unset forward_quote        # quote forwarded message, if not $mime_forward
+  set hdrs                 # nohdrs implies not to write my_hdr into mail.
+  set header               # quote full header on reply
+unset help                 # show help in first line of the display
+unset hidden_host          # when set, skip the host name part of hostname
+                           # set honor_followup_to - Mail-Followup-To header is honored?
+unset ignore_list_reply_to # ignore Reply-To pointing back to mailinglist
+  set implicit_autoview    # use autoview, if a "copiousoutput" is in mailcap.
+                           # set mailcap_sanitize - remove ugly chars from mailcap % expands.
+  set mark_old             # mark new articles as old, when leaving mbox
+unset markers              # put a '+' at the beginning of wrapped lines.
+  set menu_scroll          # scroll on last line of menu (set) or do a nextpage?
+unset meta_key             # Don't interpret Alt-x as ESC x
+unset metoo                # should we keep ourselves in group replies?
+  set mh_purge             # remove messages marked as deleted from MH folders.
+  set mime_forward_decode  # decode messages when forwarding with MIME
+  set pager_stop           # Don't jump to next message at end of message.
+unset pipe_decode          # Weed headers and PGP-decode message before piping
+  set pipe_split           # split tagged messages (or don't) when using "|"
+unset prompt_after         # display prompt after exit from pager
+unset read_only            # folders not read only
+unset reply_self           # if unset, a reply to yourself implies reply to other
+  set resolve              # go to next undeleted message after modifying actual
+  set reverse_alias        # use realname from reverse alias lookup
+  set reverse_name         # Set "From" to address, where replied mail was sent to
+unset save_address         # Use full mail adress (with domain) as default folder.
+unset save_empty           # remove mailbox when last message is removed.
+unset save_name            # Fcc, if ~/Mail/<to> exists.
+  set score                # don't do scoring
+unset sig_dashes           # Don't prepend "-- \n" to the signature
+  set smart_wrap           # wrap long lines at word boundary.
+  set sort_re              # set: only put a child in a thread, if starts with Re
+  set status_on_top        # status line at the top or button?
+unset strict_threads       # thread only by In-Reply-To/References or by Subject.
+unset suspend              # Ctrl-Z is able to suspend mutt.
+unset thorough_search      # MIME decode before searching.
+  set tilde                # Internal Pager: ~~~~ at and of message?
+unset uncollapse_jump      # don't move pointer, when uncollapsing thread
+  set use_8bitmime         # run sendmail 8.8.x with -B8BITMIME to enable 8bit
+unset use_domain           # add $domain to all addresses without @host
+  set use_from             # generate a "From:" header (unless my_hdr From:)
+  set user_agent           # Create User-Agent: Mutt/<Version> header.
+  set wait_key             # Only "press a key" if return value non-zero
+  set wrap_search          # Wrap search to top/bottom.
+unset write_bcc            # send Bcc: line to $sendmail
+  set mailcap_sanitize     # Needed
+
+# Quadoptions
+#       set foo=yes
+#  or   set foo=ask-yes
+#  or   set foo=no
+#  or   set foo=ask-no
+#  or   reset foo (reset to compile time default)
+
+set abort_nosubject   = no      # Abort, if message has no subject.
+set abort_unmodified  = yes     # Abort, if message wasn't edited.
+set delete            = yes     # ask for confirmation when deleting messages?
+set edit_headers      = yes     # Allows headers to be edited
+set envelope_from     = yes     # Tells mutt to use the -f settting.
+set include           = yes     # quote message, when replying
+set mime_forward      = ask-yes # use MIME when forwarding mails.
+set mime_forward_rest = yes     # forward all attachments (requires mime forward)
+set move              = no      # Move mail-spool to $mbox?
+set postpone          = ask-yes # ask for postponing when doing an Abort.
+set print             = ask-yes # ask whether you really want to print.
+set quit              = yes     # ask before quitting.
+set recall            = yes     # ask for using postponed message.
+set reply_to          = ask-yes # Use or ignore Reply-To.
+
+
+# Config options
+
+set visual            = "mutt %s"
+set ispell            = ispell
+set followup_to       = no   # Somebody intelligent seems to prefer \
+set honor_followup_to = no   # this option, going to try it out.
+set timeout           = 60
+set sleep_time        = 0
+set attribution       = "* On %d %m %y, %n (%a) wrote:"
+set charset           = "iso-8859-1"
+# set send_charset    = "us-ascii:iso-8859-1:utf-8"
+set send_charset      = "utf-8:iso-8859-1"
+
+
+## Character Set Hooks
+charset-hook ^unknown-8bit$ windows-1252
+charset-hook ^x-user-defined$ windows-1252
+charset-hook ^iso-8859-1$ windows-1252
+charset-hook ^us-ascii$ windows-1252
+charset-hook ^none$ windows-1252
+charset-hook ^iso-8859-8-i$ iso-8859-8
+charset-hook ^gb2312$ gb18030
+
+#set editor           = "vim '+/^$'"
+#set editor           = "vim '+:5'"
+#set editor           = "emacsclient -t %s"
+#set editor           = "mate -w -l 8"
+set editor            = "vim +':set textwidth = 72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
+#set pager            = "emacsclient"
+#set editor           = "emacsclient -t +9 %s -a emacs"
+#set editor           = "vim +':set textwidth = 72' +':set wrap' %s"
+set history           = 200
+set indent_str        = "> "
+set mail_check        = 3
+set mbox              = ~/.mail                            # Where is my main mailbox (where should read mail go)
+set pager_context     = 3
+set pager_index_lines = 7                                         # number of lines to see from the index
+set pgp_timeout       = 120                                       # number of seconds to cache passphrase
+set postponed         = ~/.mail/postponed/
+set quote_regexp      = "^( {0,4}-?[>|:%]| {0,4}[a-z0-9]+[>|]+)+"
+set read_inc          = 20
+set reply_regexp      = "^((re|RE|SV|Re|r e|aw) ?:[ \t]*)*"
+set simple_search     = "~f %s | ~t %s | ~C %s | ~s %s"           # default pattern (Fr|To|Cc|Su)
+set sort_alias        = alias
+set sort_browser      = alpha
+set spoolfile         = ~/.mail/default
+set status_chars      = "-*%A"                                    # status of mbox (unchanged, changed, readonly, attach)
+set tmpdir            = "/tmp"
+set to_chars          = " +TCFL"                                  # default (Not to me, To me, CC me, From me, mailing list)
+set write_inc         = 10                                        # number - display increment count for every n-th mail
+set date_format       = "!%a %b %d, %Y at %I:%M:%S%p %Z"
+set default_hook      = "~f %s | ~t %s"
+
+#set record           = +sent     # Where to save sent mail?
+#set to_chars         = " +TCF "  #default (Not to me, To me, CC me, From me)
+
+
+## ========================================================================
+## Muttprint
+## ========================================================================
+set print_command="/usr/bin/muttprint %s -p "
+
+#auto_view text/html text/enriched application/x-gunzip application/postscript /gif application/x-tar-gz application/pgp-signature image/* application/octet-stream
+
+source ~/.mutt-config/mutt/bindings-and-macros   # Macros
+source ~/.mutt-config/mutt/color-settings        # Color Settings
+source ~/.mutt-config/mutt/autoviews             # Autoviews from mailcap
+source ~/.mutt-config/mutt/mailbox-and-addresses # Mailboxes and Mail Account settings
+source ~/.mutt-config/mutt/crypto                # Crypto Config
+source ~/.mutt-config/mutt/url-viewing           # Url Viewing app config
+source ~/.mutt-config/mutt/display-format         # Display configs
+# done

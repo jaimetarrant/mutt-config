@@ -1,0 +1,20 @@
+# -*- muttrc -*-
+
+## ======================================================================
+## Format Strings:
+## ======================================================================
+
+## forward_format - format the text used in the format attribution
+set forward_format="(forw) [%a: %s]"
+#set index_format="%4C %Z %[!%d/%m] %-17.17F %L (%3l) %B %s"
+#set index_format="%4C %Z %{%b %d} %-15.15F %4c %?H?[%H] ?%s"
+#set index_format="%5C %Z %[!%y.%m.%d] %-15.15F (%?M?C%3M&%4l?) %s"
+#set index_format="%Z %{%b %d %H:%M} %-20.20L [%5c] [%?Y?%-10.10y&----------?> %s"
+set index_format="%5C %Z %[!%y.%m.%d %b %H:%M] %-25.25F [%5c] [%?Y?%-10.10y&---?> %s"
+
+set pager_format="%S [%C] %n (%l) %s"
+set folder_format="%F %-8.8u %-8.8g %d %8s %N %f"
+#set folder_format="%F %d %8s %N %f"
+set status_format="-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b? %?l? %l?]---(%s/%S)-%>-(%P)---"
+#set  status_format="-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?  %l]---(%s)-%>-(%P)---"
+

@@ -1,0 +1,71 @@
+# -*- muttrc -*-
+
+### color attachment brightyellow black
+### color hdrdefault cyan black
+### color quoted    green black
+### color tree      red black
+
+# color patterns for mutt
+color normal     white          default # normal text
+color indicator  default        red     # actual message
+color tree       brightmagenta  default # thread arrows
+color status     yellow         default # status line
+color error      brightred      default # errors
+color message    magenta        default # info messages
+color signature  magenta        default # signature
+color attachment brightyellow   red     # MIME attachments
+color search     brightyellow   red     # search matches
+color tilde      brightmagenta  default # ~ at bottom of msg
+color markers    red            default # + at beginning of wrapped
+color hdrdefault cyan           default # default header lines
+color bold       red            default # hiliting bold patterns in
+color underline  green          default # hiliting underlined patterns
+color quoted     cyan           default # quoted text
+color quoted1    magenta        default
+color quoted2    red            default
+color quoted3    green          default
+color quoted4    magenta        default
+color quoted5    cyan           default
+color quoted6    magenta        default
+color quoted7    red            default
+color quoted8    green          default
+color quoted9    cyan           default
+
+# Dealing with unread, ibenox messages
+#
+color index       white          default "~p"
+#color index      blue          default.
+color index       white          default "~R"
+color index       cyan           default "~R (~t .*ibenox*)"
+color index       green          default "!~R"
+#color index      green         white   "~N"
+color index       brightmagenta  default "!~R (~t .*tarrissa*)"
+color index       magenta        default "~R (~t .*tarrissa*)"
+color index       brightmagenta  default "!~R (~f .*willowgourmet*)"
+color index       magenta        default "~R (~f .*willowgourmet*)"
+color index       brightmagenta  default "!~R (~f tukie*)"
+color index       magenta        default "~R (~f tukie*)"
+color index       brightwhite    default "!~R (~t .*cookiesystems*)"
+color index       white          default "~R (~t .*cookiesystems*)"
+color index       brightred      default   "~N (~t .*ibenox*)"
+color index       brightcyan     default "!~R (~t .*ibenox*)"
+color index       brightred      default   "~N (~t .*incuto*)"
+color index       brightcyan     default "!~R (~t .*incuto*)"
+
+#color index      brightwhite     red "!~R (~B IBENOXFIN)"
+#color index      brightred       white       "~R (~B IBENOXFIN)"
+#color index      brightblue      default "~N (~x *.ibenox\.com )"
+color index       yellow         default "~T"
+color index       red            default ~D
+#
+color index       cyan           default  ~F         # Flagged
+
+
+color body   cyan  default  "((ftp|http|https)://|news:)[^ >)\"\t]+"
+color body   cyan  default  "[-a-z_0-9.+]+@[-a-z_0-9.]+"
+color body   red   default  "(^| )\\*[-a-z0-9*]+\\*[,.?]?[ \n]"
+color body   green default  "(^| )_[-a-z0-9_]+_[,.?]?[\n]"
+color body   red   default  "(^| )\\*[-a-z0-9*]+\\*[,.?]?[ \n]"
+color body   green default  "(^| )_[-a-z0-9_]+_[,.?]?[ \n]"
+
+

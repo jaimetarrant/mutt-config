@@ -1,0 +1,35 @@
+
+# Example .msmtprc example
+# Configure to suit your environment and place this file as ~/.msmtprc
+#
+# Make sure the file is secure.  chmod 0600 ~/.msmtprc
+#
+
+
+# Google Apps example
+
+account cookiesystems                             # The account name (can be anything to identify it)
+from jdt@cookiesystems.com                        # email address. msmtp will look at envelope_from
+host smtp.gmail.com                               # smtp host
+port 587                                          # port
+user jdt@cookiesystems.com                        # username
+password mytopsecretpassword                      # password
+auth on                                           # Requires Authentication
+tls on                                            # Use TLS
+tls_certcheck on                                  # Check the TLS Cert
+tls_trust_file /etc/ssl/certs/ca-certificates.crt # Location of ca-certs
+
+# Zoho Example
+
+account willowgourmet
+from jdt@willowgourmet.com.au
+host smtp.zoho.com
+port 465
+user jdt@willowgourmet.com.au
+password mytopsecretpassword
+auth on
+tls on
+tls_certcheck on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account default: cookiesystems                    # Which account to use by default
