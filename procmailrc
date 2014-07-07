@@ -26,8 +26,8 @@ SENDMAIL   = /usr/bin/msmtp
 | formail -A "Lines: $="
 
 # Remove duplicate messages - no idea how it works.
-:0 hW: msgid.lock
-| $FORMAIL -D 8192 msgid.cache
+#:0 hW: msgid.lock
+#| $FORMAIL -D 8192 msgid.cache
 
 # SpamAssassin sample procmailrc
 # [[ http://wiki.apache.org/spamassassin/UsedViaProcmail ]]
@@ -36,6 +36,8 @@ SENDMAIL   = /usr/bin/msmtp
 # at 1 time, to keep the load down.
 
 # apply spamassassin to messages < 250 kb
+# you will have to train spamassassin!
+#
 :0 fbw: spamassassin.lock
 * < 256000
 | spamassassin
