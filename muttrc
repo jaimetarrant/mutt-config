@@ -129,28 +129,9 @@ set honor_followup_to = no   # this option, going to try it out.
 set timeout           = 60
 set sleep_time        = 0
 set attribution       = "* On %d %m %y, %n (%a) wrote:"
-set charset           = "iso-8859-1"
+set charset           = "utf-8"
 # set send_charset    = "us-ascii:iso-8859-1:utf-8"
 set send_charset      = "utf-8:iso-8859-1"
-
-
-## Character Set Hooks
-charset-hook ^unknown-8bit$ windows-1252
-charset-hook ^x-user-defined$ windows-1252
-charset-hook ^iso-8859-1$ windows-1252
-charset-hook ^us-ascii$ windows-1252
-charset-hook ^none$ windows-1252
-charset-hook ^iso-8859-8-i$ iso-8859-8
-charset-hook ^gb2312$ gb18030
-
-#set editor           = "vim '+/^$'"
-#set editor           = "vim '+:5'"
-#set editor           = "emacsclient -t %s"
-#set editor           = "mate -w -l 8"
-set editor            = "vim +':set textwidth = 72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
-#set pager            = "emacsclient"
-#set editor           = "emacsclient -t +9 %s -a emacs"
-#set editor           = "vim +':set textwidth = 72' +':set wrap' %s"
 set history           = 200
 set indent_str        = "> "
 set mail_check        = 3
@@ -175,6 +156,25 @@ set default_hook      = "~f %s | ~t %s"
 
 #set record           = +sent     # Where to save sent mail?
 #set to_chars         = " +TCF "  #default (Not to me, To me, CC me, From me)
+
+
+
+## Character Set Hooks
+charset-hook ^unknown-8bit$ windows-1252
+charset-hook ^x-user-defined$ windows-1252
+charset-hook ^iso-8859-1$ windows-1252
+charset-hook ^us-ascii$ windows-1252
+charset-hook ^none$ windows-1252
+charset-hook ^iso-8859-8-i$ iso-8859-8
+charset-hook ^gb2312$ gb18030
+
+#set editor           = "vim '+/^$'"
+#set editor           = "vim '+:5'"
+#set editor           = "emacsclient -t %s"
+#set editor           = "mate -w -l 8"
+set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
+#set editor           = "emacsclient -t +9 %s -a emacs"
+#set editor           = "vim +':set textwidth = 72' +':set wrap' + ':set spell' %s"
 
 
 ## ========================================================================
