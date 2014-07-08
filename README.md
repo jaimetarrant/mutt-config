@@ -12,6 +12,16 @@ features:
  - msmtp to send mail
  - goobook for address lookup
 
+Mail is stored locally (handy for laptop users). The way I like to deal with
+mail is perhaps a bit different to most people, so be sure to optimise things
+to suit your own environment if you decide to copy a fair part of it.
+
+**NOTE:** Large parts of this config have been inspired, or shamelessly copied
+from other people's configs. Instead of re-inventing the wheel, I've gone for
+what works. I have found that looking at other peoples configurations on
+github and via google is a great way to learn new ideas and optimise your
+own config.
+
 ## Environment
 
 This config uses `fetchmail`, `procmail`, `msmtp`, `goobook`, `spamassassin`,
