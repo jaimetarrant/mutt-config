@@ -114,7 +114,9 @@ particular, don't forget to:
 (Not written yet)
 
 
+## See also
 
+List other good configs here
 
 
 
