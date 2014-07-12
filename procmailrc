@@ -175,13 +175,15 @@ $MAILDIR/cahp/
 #####################################################################
 # Mailing Lists
 
+# Famo.us
 :0
-* ^(From|Cc|To).*lists.fedoraproject.org
-$MAILDIR/lists/fedora/
+* ^List-Id:.*famous.Famous
+$MAILDIR/lists/famous/
 
+# Suckless
 :0
-* ^List-Id:.*users.list.fedoraproject.org
-$MAILDIR/lists/fedora/
+* ^List-Id:.*dev.suckless.org
+$MAILDIR/lists/suckless/
 
 # Debian Development Mailing Lists
 :0
@@ -270,12 +272,23 @@ $MAILDIR/lists/ugs/
 * ^List-Id:.*vim_use
 $MAILDIR/lists/vim/
 
+# Fedora
+:0
+* ^(From|Cc|To).*lists.fedoraproject.org
+$MAILDIR/lists/fedora/
+
+:0
+* ^List-Id:.*users.list.fedoraproject.org
+$MAILDIR/lists/fedora/
+
 ## Job email notifications
 
+# Jobserve
 :0
 * ^From:.*jobserve.com
 $MAILDIR/lists/it-market/
 
+# SEEK
 :0
 * ^From:.*seek.com.au
 $MAILDIR/lists/it-market/
