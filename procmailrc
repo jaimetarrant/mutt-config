@@ -38,9 +38,9 @@ SENDMAIL   = /usr/bin/msmtp
 # apply spamassassin to messages < 250 kb
 # you will have to train spamassassin!
 #
-:0 fbw: spamassassin.lock
-* < 256000
-| spamassassin
+#:0 fbw: spamassassin.lock
+#* < 256000
+#| spamassassin
 
 # Mails with a score of 15 or higher are almost certainly spam
 # (with 0.05% false positives according to rules/STATISTICS.txt).

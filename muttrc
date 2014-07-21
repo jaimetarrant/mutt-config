@@ -14,7 +14,7 @@
 set realname     = "Jaime Tarrant"  # hopefully wont change much
 set folder       = ~/.mail/         # directory with all mail folders
 set mbox_type    = "Maildir"        # Use Maildir (I used to use mbox which works fine too).
-set sendmail     = "/usr/bin/msmtp" # I use msmtp for easy config of multiple sender accounts.
+set sendmail     = "/usr/local/bin/msmtp" # I use msmtp for easy config of multiple sender accounts.
                                     # set alias_file =~/.mutt/aliases .. deprecated - using goobook now.
 # source ~/.mutt/aliases            # alias file location
 
@@ -170,9 +170,9 @@ charset-hook ^gb2312$ gb18030
 
 #set editor           = "vim '+/^$'"
 #set editor           = "vim '+:5'"
-set editor           = "emacsclient +9 %s -a emacs"
+#set editor           = "emacsclient +9 %s -a emacs"
 #set editor           = "mate -w -l 8"
-#set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
+set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
 #set editor           = "emacsclient -t +9 %s -a emacs"
 #set editor           = "vim +':set textwidth = 72' +':set wrap' + ':set spell' %s"
 
