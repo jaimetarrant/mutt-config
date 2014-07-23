@@ -2,7 +2,7 @@
 # Jaime's procmail config
 #
 
-SHELL      = /bin/bash
+SHELL      = /bin/sh
 LINEBUF    = 4096
 VERBOSE    = off
 # PATH     = /bin:/usr/bin:/usr/local/bin # not really needed - should work on most
@@ -13,8 +13,8 @@ SPAM       = $MAILDIR/spam/
 UNWANTED   = $MAILDIR/unwanted/
 
 LOGFILE    = $HOME/.mail/procmaillog
-FORMAIL    = /usr/bin/formail
-SENDMAIL   = /usr/bin/msmtp
+FORMAIL    = /usr/local/bin/formail
+SENDMAIL   = /usr/local/bin/msmtp
 
 # MAILDIR LINES
 # # Add Lines header for mutt with Maildirs. Mutt shows lines based on Lines

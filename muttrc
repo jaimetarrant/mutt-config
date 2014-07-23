@@ -135,7 +135,7 @@ set send_charset      = "utf-8:iso-8859-1"
 set history           = 200
 set indent_str        = "> "
 set mail_check        = 3
-set mbox              = ~/.mail                            # Where is my main mailbox (where should read mail go)
+set mbox              = ~/.mail                                   # Where is my main mailbox (where should read mail go)
 set pager_context     = 3
 set pager_index_lines = 7                                         # number of lines to see from the index
 set pgp_timeout       = 120                                       # number of seconds to cache passphrase
@@ -169,7 +169,6 @@ charset-hook ^iso-8859-8-i$ iso-8859-8
 charset-hook ^gb2312$ gb18030
 
 #set editor           = "vim '+/^$'"
-#set editor           = "vim '+:5'"
 #set editor           = "emacsclient +9 %s -a emacs"
 #set editor           = "mate -w -l 8"
 set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
@@ -184,11 +183,11 @@ set print_command="/usr/bin/muttprint %s -p "
 
 #auto_view text/html text/enriched application/x-gunzip application/postscript /gif application/x-tar-gz application/pgp-signature image/* application/octet-stream
 
-source ~/.mutt-config/mutt/bindings-and-macros   # Macros
-source ~/.mutt-config/mutt/color-settings        # Color Settings
-source ~/.mutt-config/mutt/autoviews             # Autoviews from mailcap
-source ~/.mutt-config/mutt/mailbox-and-addresses # Mailboxes and Mail Account settings
-source ~/.mutt-config/mutt/crypto                # Crypto Config
-source ~/.mutt-config/mutt/url-viewing           # Url Viewing app config
+source ~/.mutt-config/mutt/bindings-and-macros    # Macros
+source ~/.mutt-config/mutt/color-settings         # Color Settings
+source ~/.mutt-config/mutt/autoviews              # Autoviews from mailcap
+source ~/.mutt-config/mutt/mailbox-and-addresses  # Mailboxes and Mail Account settings
+source ~/.mutt-config/mutt/crypto                 # Crypto Config
+source ~/.mutt-config/mutt/url-viewing            # Url Viewing app config
 source ~/.mutt-config/mutt/display-format         # Display configs
 # done
