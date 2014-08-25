@@ -5,19 +5,34 @@
 # Make sure the file is secure.  chmod 0600 ~/.msmtprc
 #
 
+# Commented example - wont work as msmtp will error out if parsing
+# a line that has a comment at the end.
+#
+# account cookiesystems                             # The account name (can be anything to identify it)
+# from jdt@cookiesystems.com                        # email address. msmtp will look at envelope_from
+# host smtp.gmail.com                               # smtp host
+# port 587                                          # port
+# user jdt@cookiesystems.com                        # username
+# password mytopsecretpassword                      # password
+# auth on                                           # Requires Authentication
+# tls on                                            # Use TLS
+# tls_certcheck on                                  # Check the TLS Cert
+# tls_trust_file /etc/ssl/certs/ca-certificates.crt # Location of ca-certs
+
+#
 
 # Google Apps example
 
-account cookiesystems                             # The account name (can be anything to identify it)
-from jdt@cookiesystems.com                        # email address. msmtp will look at envelope_from
-host smtp.gmail.com                               # smtp host
-port 587                                          # port
-user jdt@cookiesystems.com                        # username
-password mytopsecretpassword                      # password
-auth on                                           # Requires Authentication
-tls on                                            # Use TLS
-tls_certcheck on                                  # Check the TLS Cert
-tls_trust_file /etc/ssl/certs/ca-certificates.crt # Location of ca-certs
+account cookiesystems
+from jdt@cookiesystems.com
+host smtp.gmail.com
+port 587
+user jdt@cookiesystems.com
+password mytopsecretpassword
+auth on
+tls on
+tls_certcheck on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
 
 # Zoho Example
 
