@@ -185,46 +185,6 @@ $MAILDIR/lists/famous/
 * ^List-Id:.*dev.suckless.org
 $MAILDIR/lists/suckless/
 
-# Debian Development Mailing Lists
-:0
-* ^List-Id:.*debian-bugs
-$MAILDIR/lists/debian-dev/
-
-:0
-* ^List-Id:.*debian-release
-$MAILDIR/lists/debian-dev/
-
-:0
-* ^List-Id:.*debian-devel
-$MAILDIR/lists/debian-dev/
-
-# Debian Bugs Mailing Lists
-:0
-* ^(From|Cc|To).*bugs.debian.org
-$MAILDIR/lists/debbugs/
-
-# Debian Users - Mailing Lists
-:0
-* ^List-Id:.*debian-user
-$MAILDIR/lists/debian/
-
-:0
-* ^List-Id:.*debian-publicity
-$MAILDIR/lists/debian/
-
-:0
-* ^List-Id:.*debian-doc
-$MAILDIR/lists/debian/
-
-:0
-* ^List-Id:.*debian-legal
-$MAILDIR/lists/debian/
-
-# Missed Debian list catch-all
-:0 :
-* ^(From|Cc|To).*lists.debian.org
-$MAILDIR/lists/debian/
-
 # Erlang
 :0
 * ^(From|Cc|To).*lists.therestfulway.com
@@ -271,15 +231,6 @@ $MAILDIR/lists/ugs/
 :0
 * ^List-Id:.*vim_use
 $MAILDIR/lists/vim/
-
-# Fedora
-:0
-* ^(From|Cc|To).*lists.fedoraproject.org
-$MAILDIR/lists/fedora/
-
-:0
-* ^List-Id:.*users.list.fedoraproject.org
-$MAILDIR/lists/fedora/
 
 ## Job email notifications
 
