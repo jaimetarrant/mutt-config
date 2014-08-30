@@ -26,8 +26,14 @@ folder-hook "!"   set timeout=5
 folder-hook "!"   set sort=date-sent
 folder-hook "sent"  set sort=date-sent
 
-folder-hook "lists/debian"  set sort=threads
-folder-hook "lists/debian" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/fbsd"  set sort=threads
+folder-hook "lists/fbsd" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/obsd"  set sort=threads
+folder-hook "lists/obsd" "set from=jdt.l@cookiesystems.com"
+folder-hook "lists/dfly"  set sort=threads
+folder-hook "lists/dfly" "set from=jdt.l@cookiesystems.com"
+
+
 folder-hook "lists/fedora"  set sort=threads
 folder-hook "lists/fedora" "set from=jdt.l@cookiesystems.com"
 folder-hook "lists/mutt"   "set from=jdt.l@cookiesystems.com"

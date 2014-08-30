@@ -218,6 +218,55 @@ $MAILDIR/lists/msmtp/
 * ^(From|Cc|To).*mutt.org
 $MAILDIR/lists/mutt/
 
+## The BSD's
+# FBSD srce changes
+:0
+* ^List-Id:.*svn-src-all.freebsd.org
+$MAILDIR/lists/fbsd/
+
+# FBSD Current
+:0
+* ^List-Id:.*freebsd-current.freebsd.org
+$MAILDIR/lists/fbsd/
+
+# FBSD Questions
+:0
+* ^List-Id:.*freebsd-questions.freebsd.org
+$MAILDIR/lists/fbsd/
+
+
+# OBSD Ports
+:0
+* ^List-Id:.*ports.openbsd.org
+$MAILDIR/lists/obsd/
+
+# OBSD Tech
+:0
+* ^List-Id:.*tech.openbsd.org
+$MAILDIR/lists/obsd/
+
+# OBSD Misc
+:0
+* ^List-Id:.*misc.openbsd.org
+$MAILDIR/lists/obsd/
+
+# OBSD Source Chances
+:0
+* ^List-Id:.*source-changes.openbsd.org
+$MAILDIR/lists/obsd/
+
+
+# DFLY Commits
+:0
+* ^List-Id:.*commits.dragonflybsd.org
+$MAILDIR/lists/dfly/
+
+# DFLY Users
+:0
+* ^List-Id:.*users.dragonflybsd.org
+$MAILDIR/lists/dfly/
+
+
 :0
 * ^List-Id:.*mutt-users
 $MAILDIR/lists/mutt/
@@ -271,6 +320,15 @@ $MAILDIR/unwanted/
 :0
 * ^(From|Cc|To).*ebay.com.au
 $MAILDIR/unwanted/
+
+# Linkedin mailer
+:0 D
+* ^X-[Ll]inkedin-Class:.*(GROUPDIGEST)
+{
+LOG="Linkedin Mailer "
+:0 :
+$MAILDIR/lists/olists/
+}
 
 :0
 * ^(From|Cc|To).*linkedin.com
