@@ -171,8 +171,8 @@ charset-hook ^gb2312$ gb18030
 #set editor           = "vim '+/^$'"
 #set editor           = "emacsclient +9 %s -a emacs"
 #set editor           = "mate -w -l 8"
-#set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
-set editor           = "emacsclient -t +9 %s -a emacs"
+set editor            = "vim +':set textwidth=72' +':set wrap' +':set spell' +\`awk '/^$/ {print i+2; exit} {i++}' %s\` %s"
+#set editor           = "emacsclient -t +9 %s -a emacs"
 #set editor           = "vim +':set textwidth = 72' +':set wrap' + ':set spell' %s"
 
 
