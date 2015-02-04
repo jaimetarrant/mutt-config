@@ -255,6 +255,10 @@ $MAILDIR/lists/obsd/
 * ^List-Id:.*source-changes.openbsd.org
 $MAILDIR/lists/obsd/
 
+# Debian
+:0
+* ^List-Id:.*lists.debian.org
+$MAILDIR/lists/debian/
 
 # DFLY Commits
 :0
