@@ -49,24 +49,21 @@ macro pager   "\e?" "<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
 # ===========================================
 # # Use abook as the address book and query db
 # # ===========================================
-# macro index ,ea "!abook-autoexport\n:source ~/.mutt/aliases\n" "Start
-# abook"
-# #macro index A "|abook-autoexport --add-email-quiet\n:source
-# ~/.mutt/aliases\n".
+#macro index ,ea "!abook-autoexport\n:source ~/.mutt/aliases\n" "Start abook"
+#macro index A "|abook-autoexport --add-email-quiet\n:source ~/.mutt/aliases\n".
 # # "Create new alias from the actual message"
-# #set query_command = "abook --mutt-query '%s'"
+set query_command = "abook --mutt-query '%s'"
 macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
-# #macro generic,index,pager A "<pipe-message>abook --add-email<return>"
-# "add the sender address to abook"
+macro generic,index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
 #
 # # Goobook
-set query_command="goobook query '%s'"
-bind editor <Tab> complete-query
-macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+#set query_command="goobook query '%s'"
+#bind editor <Tab> complete-query
+#macro index,pager A "<pipe-message> add<return>" "add the sender address to Google contacts"
 #
 #
 #
-## =================================================================
+# =================================================================
 ## MACROS to change my sender account for composing new messages or
 ## replying to messages not addressed to me (thus mutt is not sure
 ## which account to use
@@ -116,14 +113,14 @@ macro attach E <save-entry><kill-line>/home/jdt/tmp<enter>
 #macro index A "|abook-autoexport --add-email-quiet\n:source ~/.mutt/aliases\n"
 # "Create new alias from the actual message"
 #set query_command = "abook --mutt-query '%s'"
-#macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
-#macro generic,index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
+macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
+macro generic,index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
 
 # Goobook
 # set query_command="goobook query \'%s\'"
-set query_command="goobook query '%s'"
-bind editor <Tab> complete-query
-macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+#set query_command="goobook query '%s'"
+#bind editor <Tab> complete-query
+#macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 
 #macro index,pager ,td <pipe-message><enter>s="TODO\n"
 
@@ -131,7 +128,7 @@ macro index,pager A "<pipe-message>goobook add<return>" "add the sender address 
 macro index ,td "<pipe-message>taskopen.sh<enter>"
 
 ##-run the little brother database query binary
-#set query_command = "abook --mutt-query '%'"
+set query_command = "abook --mutt-query '%'"
 
 #SPAMASSASSIN Macros
 
@@ -228,4 +225,3 @@ macro pager "i" "<sync-mailbox><change-folder>?<toggle-mailboxes>"
 macro index "i" "<sync-mailbox><change-folder>?<toggle-mailboxes>"
 
 macro compose S "Fgpg --clearsign\ny" "clearsign message"
-

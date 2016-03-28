@@ -52,16 +52,16 @@ macro pager   "\e?" "<shell-escape>less /usr/local/doc/mutt/manual.txt<enter>"
 # macro index ,ea "!abook-autoexport\n:source ~/.mutt/aliases\n" "Start
 # abook"
 # #macro index A "|abook-autoexport --add-email-quiet\n:source
-# ~/.mutt/aliases\n".
+~/.mutt/aliases\n".
 # # "Create new alias from the actual message"
 # #set query_command = "abook --mutt-query '%s'"
 macro generic,index,pager \ca "<shell-escape>abook<return>" "launch abook"
-# #macro generic,index,pager A "<pipe-message>abook --add-email<return>"
+macro generic,index,pager A "<pipe-message>abook --add-email<return>"
 # "add the sender address to abook"
 #
 # # Goobook
-set query_command="goobook query '%s'"
-bind editor <Tab> complete-query
-macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+#set query_command="goobook query '%s'"
+#bind editor <Tab> complete-query
+#macro index,pager A "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
 #
 #

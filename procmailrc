@@ -250,6 +250,11 @@ $MAILDIR/lists/obsd/
 * ^List-Id:.*misc.openbsd.org
 $MAILDIR/lists/obsd/
 
+# OBSD Bugs
+:0
+* ^List-Id:.*bugs.openbsd.org
+$MAILDIR/lists/obsd/
+
 # OBSD Source Chances
 :0
 * ^List-Id:.*source-changes.openbsd.org
@@ -376,4 +381,3 @@ $MAILDIR/lists/olists/
 $MAILDIR/default/
 
 # Done
-
